@@ -1,0 +1,16 @@
+{
+  "name": "exercises",
+  "version": "0.1.0",
+  "description": "Respostas do exercício de PW2",
+  "license": "ISC",
+  "author": "Francisco Dantas",
+  "type": "module",
+  "main": "01-area_of_circle.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "node 01-area_of_circle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
