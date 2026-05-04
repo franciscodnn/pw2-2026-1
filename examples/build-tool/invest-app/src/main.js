@@ -1,11 +1,10 @@
-import './style.css'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import { setupCounter } from './counter.js'
+import { investments } from './data.js';
+import { InvestmentCard } from './components/InvestmentCard.js';
 
-document.querySelector('#app').innerHTML = `
-<h1 class="text-3xl font-bold underline">Olá, Mundo!</h1>
-`
+const investmentsGrid = document.querySelector('.investments');
 
-setupCounter(document.querySelector('#counter'))
+investmentsGrid.innerHTML = investments
+  .map((investment) => InvestmentCard(investment)) // [<InvestmentCard>, <InvestmentCard:]
+  .join(''); // '<InvestmenCard><InvestmentCard>'
+
+localStorage.setItem('@invest-app:key', 'valor qualquer');

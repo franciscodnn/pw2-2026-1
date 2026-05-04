@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvestApp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto lg:max-w-screen-lg">
+        <h1 class="text-center text-2xl my-12 font-bold">Novos Investimentos</h1>
+        <!-- name
+        value
+        origin
+        category
+        created_at
+        interest 
+    -->
+        <form>
+            <div class="investments w-80 grid grid-cols-2 gap-3 mx-auto">
+            
+                <label for="name">Título:</label>
+                <input id="name" name="name" type="text" placeholder="Selic, IPCA">
+            
+            
+                <label for="value">Valor:</label>
+                <input id="value" name="value" type="text" placeholder="0,00">
+            
+            
+                <label>Origem:</label>
+                <input name="origin" type="text" placeholder="">
+            
+            
+                <label>Categoria:</label>
+                <input name="category" type="text" placeholder="Pre, Pós">
+            
+            
+                <label>Data de criação:</label>
+                <input name="created_at" type="text" placeholder="dd/mm/yyyy">
+            
+            
+                <label>Interesse:</label>
+                <input name="interest" type="text" placeholder="IPCA + 5%, 100% Selic">
+            
+                <button 
+                  class="bg-gray-400 hover:bg-gray-800 hover:text-gray-200 py-2 my-4 rounded col-start-1 col-end-3"
+                  type="button">Criar investimento</button>
+
+
+            <!-- Investimentos serão preenchidos dinamicamente -->
+            </div>
+        </form>
+    </div>
+    <!-- <script type="module" src="./src/main.js"></script> -->
+</body>
+
+</html>
