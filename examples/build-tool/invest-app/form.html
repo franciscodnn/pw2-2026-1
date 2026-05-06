@@ -18,7 +18,7 @@
         created_at
         interest 
     -->
-        <form>
+        <form id="investment-form">
             <div class="investments w-80 grid grid-cols-2 gap-3 mx-auto">
             
                 <label for="name">Título:</label>
@@ -46,14 +46,14 @@
             
                 <button 
                   class="bg-gray-400 hover:bg-gray-800 hover:text-gray-200 py-2 my-4 rounded col-start-1 col-end-3"
-                  type="button">Criar investimento</button>
+                  type="submit">Criar investimento</button>
 
 
             <!-- Investimentos serão preenchidos dinamicamente -->
             </div>
         </form>
     </div>
-    <!-- <script type="module" src="./src/main.js"></script> -->
+    <script type="module" src="./src/InvestmentForm.js"></script>
 </body>
 
 </html>
