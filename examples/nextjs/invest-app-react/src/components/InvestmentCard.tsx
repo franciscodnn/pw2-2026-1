@@ -1,15 +1,18 @@
 import { formatCurrency, formatDate } from "@/lib/utils";
 
-export default function InvestmentCard({investment, id, children}: { investment: any, id: string, children: React.ReactNode}) {
+export default function InvestmentCard(
+    {investment, classe } : { investment: any, classe?: string} ) 
+{
     // const investment = props.investment;
     // const id = props.id;
 
-    console.log(id);
+    // console.log(id);
+
     return (
         <div className="bg-white shadow-md rounded-lg p-4 relative">
             <div className="flex justify-between items-center">
                 <h3 className="investment-name text-lg font-semibold text-gray-700">
-                    {investment.name} - {children}
+                    {investment.name}
                 </h3>
                 <p className="investment-value text-lg font-semibold text-gray-700">
                     {formatCurrency(investment.value / 100)}
@@ -36,7 +39,7 @@ export default function InvestmentCard({investment, id, children}: { investment:
                 </p>
             </div>
             <button
-                data-id={id}
+                data-id={investment.id}
                 className="absolute bottom-3 right-3 text-gray-300 hover:text-red-400 transition-colors"
                 title="Remover investimento"
             >
