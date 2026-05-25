@@ -3,6 +3,10 @@ import Header from "@/components/header";
 import InvestmentCard from "@/components/InvestmentCard";
 import { formatCurrency, formatDate } from "@/lib/utils";
 
+export const metadata = {
+  title: 'Home | InvestApp'
+}
+
 export default function Home() {
   const investment = {
     id: 'b9f2414d-b8dd-484d-8179-83383d10a3fd',
@@ -16,10 +20,12 @@ export default function Home() {
 
   return (
   <div className="container mx-auto lg:max-w-screen-lg">
-    <Header />    
+    <Header />        
     <div className="investments grid grid-cols-3 gap-3">
         { /* Investimentos serão preenchidos dinamicamente */ }
-        <InvestmentCard investment={investment} id="1" />
+        <InvestmentCard investment={investment} id="1">
+          Teste
+        </InvestmentCard>
     </div>
   </div>
   );
