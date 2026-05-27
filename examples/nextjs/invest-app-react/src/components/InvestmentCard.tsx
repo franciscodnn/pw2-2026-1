@@ -1,12 +1,13 @@
+'use client';
+
 import { formatCurrency, formatDate } from "@/lib/utils";
+import { useContext } from "react";
+import { VisualizavelContext } from "@/contexts/VisualizavelContext";
 
 export default function InvestmentCard(
-    {investment, classe } : { investment: any, classe?: string} ) 
+    {investment } : { investment: any } ) 
 {
-    // const investment = props.investment;
-    // const id = props.id;
-
-    // console.log(id);
+    const { visualizavel } = useContext(VisualizavelContext);
 
     return (
         <div className="bg-white shadow-md rounded-lg p-4 relative">
@@ -15,7 +16,7 @@ export default function InvestmentCard(
                     {investment.name}
                 </h3>
                 <p className="investment-value text-lg font-semibold text-gray-700">
-                    {formatCurrency(investment.value / 100)}
+                    { visualizavel ? formatCurrency(investment.value / 100) : '***'}
                 </p>
             </div>
             <div className="mt-4">
