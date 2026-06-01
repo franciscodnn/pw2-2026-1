@@ -18,7 +18,7 @@ export default function Home() {
           { /* Investimentos serão preenchidos dinamicamente */ }
           { 
             investments.map(
-              (investment) => <InvestmentCard investment={investment} key={ investment.id} />
+              (investment) => <InvestmentCard investment={investment} key={ investment.id } />
             )
           }
           
