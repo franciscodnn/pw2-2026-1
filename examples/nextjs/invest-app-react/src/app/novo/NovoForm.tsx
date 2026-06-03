@@ -5,13 +5,14 @@ import Link from "next/link";
 import { useState, useContext } from "react";
 import { InvestmentsContext } from "@/contexts/InvestmentsContext";
 
-export default function NovoForm() {
+export default function NovoForm({ investmentToEdit }: { investmentToEdit?: Investment | undefined }) {
   const { 
     investments, setInvestments 
   } = useContext(InvestmentsContext);
 
-  const [investment, setInvestment] = useState<Investment>({
-    id: String(investments.length + 1),
+  const isEditing = investmentToEdit ? true : false;
+
+  const [investment, setInvestment] = useState<Investment>(investmentToEdit || {
     name: '',
     value: 0,
     origin: '',
@@ -21,18 +22,26 @@ export default function NovoForm() {
   });
 
   function save(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();    
+    event.preventDefault();
 
-    setInvestment( 
-      {
-        ...investment, 
+    if(!isEditing) {
+      const newInvestment = {
+        ...investment,
         id: String(investments.length + 1)
-      } 
-    );
+      };    
 
-    console.log(investment);
+      // console.log(newInvestment);
 
-    setInvestments([...investments, investment]);
+      setInvestments([...investments, newInvestment]);
+    } else {
+      const updatedInvestments = investments.map( elem => {
+        if((elem as Investment).id === investment.id) {
+          return investment;
+        }
+        return elem;
+      });
+      setInvestments(updatedInvestments);
+    }
   }
 
   function typedValue(event: React.ChangeEvent<HTMLInputElement>) {
@@ -48,7 +57,7 @@ export default function NovoForm() {
 
   return (
     <>
-      <h1 className="text-center text-2xl my-12 font-bold">Novo Investimento</h1>        
+      <h1 className="text-center text-2xl my-12 font-bold">{ isEditing ? 'Editar' : 'Novo' } Investimento</h1>        
         <form id="investment-form">
             <div className="investments w-100 grid grid-cols-2 gap-3 mx-auto">
             
@@ -96,7 +105,7 @@ export default function NovoForm() {
               <button 
                 className="bg-gray-400 hover:bg-gray-800 hover:text-gray-200 py-2 my-4 rounded col-start-1 col-end-3"
                 onClick={save}
-                type="button">Criar investimento
+                type="button">{ isEditing ? 'Salvar' : 'Criar' } investimento
               </button>
               <Link href="/" className="text-blue-500 hover:text-blue-700">
                   { "Voltar" }

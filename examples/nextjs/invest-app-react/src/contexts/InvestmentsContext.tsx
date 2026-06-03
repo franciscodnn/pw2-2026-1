@@ -1,10 +1,11 @@
 'use client';
 
+import { Investment } from "@/models/Investment";
 import { createContext, useState } from "react";
 
 export const InvestmentsContext = createContext({
     investments: [{
-        id: '',
+        // id: '',
         name: '',
         value: 0,
         origin: '',
@@ -12,11 +13,11 @@ export const InvestmentsContext = createContext({
         created_at: '',
         interest: '',
     }],
-    setInvestments: (value: any[]) => {}
+    setInvestments: (value: Investment[]) => {}
 });
 
 export function InvestmentsProvider( { children }: { children: React.ReactNode } ) {
-    const [investments, setInvestments] = useState<any[]>([{
+    const [investments, setInvestments] = useState<Investment[]>([{
                         id: '1',
                         name: 'Tesouro Selic 2029',
                         value: 10050,
