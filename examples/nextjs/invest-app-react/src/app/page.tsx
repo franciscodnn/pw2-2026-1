@@ -1,14 +1,20 @@
 'use client';
 
-import Image from "next/image";
 import Header from "@/components/Header";
 import InvestmentCard from "@/components/InvestmentCard";
 import { VisualizavelProvider } from "@/contexts/VisualizavelContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { InvestmentsContext } from "@/contexts/InvestmentsContext";
 
-export default function Home() {  
-  const { investments } = useContext(InvestmentsContext);  
+import Storage from "@/services/storage";
+
+export default function Home() {
+  const { investments, setInvestments } = useContext(InvestmentsContext);  
+
+  useEffect(() => {
+    Storage.load('investments', investments);    
+  }, []);
+  
 
   return (
     <VisualizavelProvider>
@@ -18,7 +24,7 @@ export default function Home() {
           { /* Investimentos serão preenchidos dinamicamente */ }
           { 
             investments.map(
-              (investment) => <InvestmentCard investment={investment} key={ investment.id } />
+              (investment) => <InvestmentCard investment={investment} key={ investment.id  } />
             )
           }
           

@@ -3,16 +3,13 @@
 import { Investment } from "@/models/Investment";
 import { createContext, useState } from "react";
 
-export const InvestmentsContext = createContext({
-    investments: [{
-        // id: '',
-        name: '',
-        value: 0,
-        origin: '',
-        category: '',
-        created_at: '',
-        interest: '',
-    }],
+type InvestmentsContextType = {
+    investments: Investment[];
+    setInvestments: (value: Investment[]) => void;
+};
+
+export const InvestmentsContext = createContext<InvestmentsContextType>({
+    investments: [],
     setInvestments: (value: Investment[]) => {}
 });
 
