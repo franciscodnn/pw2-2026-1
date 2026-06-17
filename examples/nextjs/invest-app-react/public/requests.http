@@ -1,0 +1,21 @@
+@HOST = https://hcozcnnnoystuyzpycnu.supabase.co/rest/v1
+@API_URL = sb_publishable_OVFBFsQIwaCv7DEXCKn7_w_LXXwSHJb
+
+### GET
+GET {{HOST}}/investments
+apikey: {{API_URL}}
+Authorization: Bearer {{API_URL}}
+
+### POST
+POST {{HOST}}/investments
+apikey: {{API_URL}}
+Authorization: Bearer {{API_URL}}
+Content-Type: application/json
+
+{
+  "name":"teste",
+  "value":10000,
+  "origin":"teste",
+  "category":"teste",  
+  "interest":"teste"
+}

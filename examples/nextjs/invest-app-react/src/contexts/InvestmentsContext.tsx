@@ -1,7 +1,8 @@
 'use client';
 
 import { Investment } from "@/models/Investment";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import Storage from "@/services/storageSupabase";
 
 type InvestmentsContextType = {
     investments: Investment[];
@@ -14,24 +15,18 @@ export const InvestmentsContext = createContext<InvestmentsContextType>({
 });
 
 export function InvestmentsProvider( { children }: { children: React.ReactNode } ) {
-    const [investments, setInvestments] = useState<Investment[]>([{
-                        id: '1',
-                        name: 'Tesouro Selic 2029',
-                        value: 10050,
-                        origin: 'Tesouro Nacional',
-                        category: 'Pós',
-                        created_at: '2023-08-22T00:00:00-03:00',
-                        interest: '100% Selic',
-                    },
-                    {
-                        id: '2',
-                        name: 'Tesouro Selic 2035',
-                        value: 150000,
-                        origin: 'Tesouro Nacional',
-                        category: 'Pré',
-                        created_at: '2023-08-22T00:00:00-03:00',
-                        interest: '100% Selic',
-                    }]);
+    const [investments, setInvestments] = useState<Investment[]>([]);
+
+    async function loadInvestments() {
+        const investments = await Storage.read('investments');
+        console.log(investments);
+        
+        setInvestments(investments);
+    }
+
+    useEffect( () => {
+        loadInvestments();
+    }, []);
     
     return (
         <InvestmentsContext.Provider value={ {investments, setInvestments} }>

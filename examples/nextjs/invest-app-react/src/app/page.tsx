@@ -5,16 +5,19 @@ import InvestmentCard from "@/components/InvestmentCard";
 import { VisualizavelProvider } from "@/contexts/VisualizavelContext";
 import { useContext, useEffect } from "react";
 import { InvestmentsContext } from "@/contexts/InvestmentsContext";
-
-import Storage from "@/services/storage";
+import { useUserAuth } from "@/contexts/UserAuthContext";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const { investments, setInvestments } = useContext(InvestmentsContext);  
+  const { investments } = useContext(InvestmentsContext);
+  const { user } = useUserAuth() as any;
+  const router = useRouter();
 
   useEffect(() => {
-    Storage.load('investments', investments);    
-  }, []);
-  
+    if (user === null) {
+      router.push('/login');
+    }
+  }, [user, router]);
 
   return (
     <VisualizavelProvider>
@@ -27,11 +30,8 @@ export default function Home() {
               (investment) => <InvestmentCard investment={investment} key={ investment.id  } />
             )
           }
-          
       </div>
-      
     </div>
-    <hr />
     </VisualizavelProvider>
   );
 }

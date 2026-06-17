@@ -5,7 +5,9 @@ import Link from "next/link";
 import { useState, useContext } from "react";
 import { InvestmentsContext } from "@/contexts/InvestmentsContext";
 
-export default function NovoForm({ investmentToEdit }: { investmentToEdit?: Investment | undefined }) {
+import Storage from "@/services/storageSupabase";
+
+export default function InvestimentForm({ investmentToEdit }: { investmentToEdit?: Investment | undefined }) {
   const { 
     investments, setInvestments 
   } = useContext(InvestmentsContext);
@@ -21,18 +23,18 @@ export default function NovoForm({ investmentToEdit }: { investmentToEdit?: Inve
     interest: ''
   });
 
-  function save(event: React.MouseEvent<HTMLButtonElement>) {
+  async function save(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
 
     if(!isEditing) {
       const newInvestment = {
-        ...investment,
-        id: String(investments.length + 1)
-      };    
+        ...investment        
+      };      
+      delete newInvestment.created_at;
 
-      // console.log(newInvestment);
+      const createdInvestment = await Storage.create('investments', newInvestment);
 
-      setInvestments([...investments, newInvestment]);
+      setInvestments([...investments, createdInvestment]);
     } else {
       const updatedInvestments = investments.map( elem => {
         if((elem as Investment).id === investment.id) {

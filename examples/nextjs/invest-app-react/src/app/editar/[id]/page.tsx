@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { InvestmentsContext } from "@/contexts/InvestmentsContext";
 import { Investment } from "@/models/Investment";
 
-import NovoForm from "@/app/novo/NovoForm";
+import InvestmentForm from "@/app/novo/InvestmentForm";
 
 export default function Editar() {
     const params = useParams();
@@ -16,6 +16,6 @@ export default function Editar() {
     const investmentToEdit = investments.find( elem => (elem as Investment).id === id);
 
     return (
-        <NovoForm investmentToEdit={ investmentToEdit } />
+        <InvestmentForm investmentToEdit={ investmentToEdit } />
     );
 }

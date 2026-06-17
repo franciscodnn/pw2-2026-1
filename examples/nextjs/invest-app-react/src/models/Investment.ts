@@ -4,6 +4,6 @@ export interface Investment {
   value: number;
   origin: string;
   category: string;
-  created_at: string;
+  created_at?: string;
   interest: string;
 }
