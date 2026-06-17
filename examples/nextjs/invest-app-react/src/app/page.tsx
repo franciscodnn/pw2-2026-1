@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <VisualizavelProvider>
-    <div className="container mx-auto lg:max-w-screen-lg">
+    <div className="container mx-auto lg:max-w-5xl">
       <Header>Investimentos</Header>      
       <div className="investments grid grid-cols-3 gap-3">
           { /* Investimentos serão preenchidos dinamicamente */ }

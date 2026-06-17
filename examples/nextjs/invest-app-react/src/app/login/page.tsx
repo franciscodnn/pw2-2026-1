@@ -18,7 +18,8 @@ export default function LoginPage() {
     const { error } = await logIn(email, password);
 
     if (error) {
-      setError(error.message);
+      // setError(error.message);
+      setError('E-mail ou senha inválidos. Tente novamente.');
     } else {
       router.push('/');
     }
