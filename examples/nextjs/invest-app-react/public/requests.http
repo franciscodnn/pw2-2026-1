@@ -1,20 +1,37 @@
-@HOST = https://hcozcnnnoystuyzpycnu.supabase.co/rest/v1
-@API_URL = sb_publishable_OVFBFsQIwaCv7DEXCKn7_w_LXXwSHJb
+@SUPABASE_HOST = 
+@SUPABASE_API_URL = {{SUPABASE_HOST}}/rest/v1
+@SUPABASE_AUTH_URL = {{SUPABASE_HOST}}/auth/v1
+@ANON_KEY = 
 
-### GET
-GET {{HOST}}/investments
-apikey: {{API_URL}}
-Authorization: Bearer {{API_URL}}
-
-### POST
-POST {{HOST}}/investments
-apikey: {{API_URL}}
-Authorization: Bearer {{API_URL}}
+### 1. Fazer Login para obter o JWT
+# @name login
+POST {{SUPABASE_AUTH_URL}}/token?grant_type=password
+apikey: {{ANON_KEY}}
 Content-Type: application/json
 
 {
+  "email": "dantas.nobre@ifpb.edu.br",
+  "password": "123456"
+}
+
+### 2. Usar o token da resposta acima para acessar os dados protegidos
+@token = {{login.response.body.access_token}}
+
+### GET
+GET {{SUPABASE_API_URL}}/investments
+apikey: {{ANON_KEY}}
+Authorization: Bearer {{token}}
+
+### POST
+POST {{SUPABASE_API_URL}}/investments
+apikey: {{ANON_KEY}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "uid": "{{login.response.body.user.id}}",
   "name":"teste",
-  "value":10000,
+  "value":50000,
   "origin":"teste",
   "category":"teste",  
   "interest":"teste"
